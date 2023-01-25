@@ -2,7 +2,7 @@ from sys import exit
 from colorama import Fore
 
 usuarios = []
-usuario = {}
+usuario = {"E-mail": '', "Senha": ''}
 usuario_logado = {"Permissão": 'offline'}
 
 # Funções
@@ -19,10 +19,11 @@ def menu_principal():
     print('''[ 1 ] Cadastro 
 [ 2 ] Login
 [ 3 ] Lista de Cadastros
+[ 4 ] Excluir Cadastro
 [ 0 ] Sair''')
     while True:
         nav_menu = int(input('Que aba deseja acessar? '))
-        if nav_menu not in [1, 2, 3, 0]:
+        if nav_menu not in [1, 2, 3, 4, 0]:
             erro('Erro! O valor inserido é inválido para a operação atual.')
         else:
             break
@@ -39,6 +40,8 @@ def menu_principal():
             else:
                 erro('O usuário logado não possui a permissão necessária para acessar essa aba.')
             menu_principal()
+    elif nav_menu == 4:
+        excluir_usuario()
     elif nav_menu == 0:
         erro('Encerrando . . .')
         exit()
@@ -85,6 +88,8 @@ def login():
         if login_email == user["E-mail"] and login_senha == user["Senha"]:
             usuario_logado.clear()
             usuario_logado["Permissão"] = 'adm'
+            usuario_logado["E-mail"] = login_email
+            usuario_logado["Senha"] = login_senha
             print('Você está logado!')
             menu_principal()
     else:
@@ -105,7 +110,7 @@ def login():
 
 def lista_usuarios():
     header('USUÁRIOS CADASTRADOS')
-    if usuarios:
+    if len(usuarios) >= 1:
         print(f'{"N.":<5}', end='')
         for key in usuario.keys():
             print(f'{key:^30}', end='')
@@ -123,6 +128,26 @@ def lista_usuarios():
         print()
     print()
     menu_principal()
+
+def excluir_usuario():
+    header('EXCLUIR CADASTRO')
+    if usuario_logado["Permissão"] == 'offline':
+        erro('Você precisa fazer login com uma conta já cadastrada antes de excluir.')
+        menu_principal()
+    erro('Deseja realmente excluir seu cadastro? A ação não poderá ser desfeita.')
+    usuario_conf = str(input('Digite sua senha para confirmar ou [N] para cancelar: '))
+    if usuario_conf in 'Nn':
+        menu_principal()
+    for CADASTRO in usuarios:
+        if CADASTRO["Senha"] == usuario_conf:
+            if CADASTRO["E-mail"] == usuario_logado["E-mail"] and CADASTRO["Senha"] == usuario_logado["Senha"]:
+                usuario_logado["Permissão"] = 'offline'
+            del usuarios[usuarios.index(CADASTRO)]
+            print('Cadastro excluído!')
+            menu_principal()
+        else:
+            erro('A senha digitada não corresponde a nenhuma senha cadastrada.')
+            excluir_usuario()
 
 #Programa Principal
 menu_principal()
