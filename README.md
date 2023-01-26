@@ -5,7 +5,7 @@ IDEs:
 - Pycharm Community
 - Visual Studio Code
 
-Tecnologias utilzadas:
+Tecnologias utilizadas:
 - Python
 
 O projeto visa desenvolver um sistema de gestão de cadastros, permissões e consultas com foco em análise de dados e privacidade de usuário.
