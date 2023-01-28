@@ -1,4 +1,4 @@
-# Cadastro-Usuario
+# Cadastro-Usuário
 Projeto pessoal / Desenvolvido para estudos teóricos e práticos.
 
 IDEs:
@@ -7,6 +7,8 @@ IDEs:
 
 Tecnologias utilizadas:
 - Python
+
+Bibliotecas Utilizadas:
 
 O projeto visa desenvolver um sistema de gestão de cadastros, permissões e consultas com foco em análise de dados e privacidade de usuário.
 
