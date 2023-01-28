@@ -1,4 +1,4 @@
-# pyUserApp
+# Cadastro-de-Usuários
 Projeto pessoal / Desenvolvido para estudos teóricos e práticos.
 
 IDEs:
